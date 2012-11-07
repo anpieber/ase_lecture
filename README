@@ -1,0 +1,16 @@
+This is a very small example presenting how OSGi can be used to assembly a swing application at runtime. The bundles are basic enough to be run in any osgi environment.
+
+For simplicity here's a quick start using Apache Karaf:
+
+1) do a "mvn clean install" in the root directory (I've added a parent pom for building all projects at once)
+2) download the latest version of Apache Karaf (karaf.apache.org) for your platform
+3) extract the server and start it using ./bin/karaf or bin\karaf.bat
+4) install all bundles by issuing the following commands:
+4.1) install mvn:sepm/sepm.api/1.0-SNAPSHOT
+4.2) install mvn:sepm/sepm.provider1/1.0-SNAPSHOT
+4.3) install mvn:sepm/sepm.provider2/1.0-SNAPSHOT
+4.4) install mvn:sepm/sepm.consumer/1.0-SNAPSHOT
+5) Use the "la" command to list and show your installed bundles
+6) Use the "start BUNDLE_ID" and "stop BUNDLE_ID" commands to play around a bit
+7) If you want to continue the development on the example issue the "dev:watch *" command (which would reload all new builds of any of your components automatically)
+8) Have fun :-)
