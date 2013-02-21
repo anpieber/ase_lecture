@@ -3,3 +3,6 @@
 atlassian-ide-plugin.xml
 *target
 out
+*.classpath
+*.project
+*.settings
