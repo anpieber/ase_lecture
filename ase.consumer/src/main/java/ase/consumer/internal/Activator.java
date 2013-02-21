@@ -43,11 +43,13 @@ public class Activator implements BundleActivator {
     }
 
     private class MainFrame extends JFrame {
-        private MainFrame() throws HeadlessException {
-            setLayout(new BoxLayout(getContentPane(), 1));
+		private static final long serialVersionUID = 1651531688775745704L;
+
+		public MainFrame() throws HeadlessException {
+            setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         }
 
-        private void addMyComponent(final JComponent component) {
+        public void addMyComponent(final JComponent component) {
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
@@ -58,7 +60,7 @@ public class Activator implements BundleActivator {
 
         }
 
-        private void removeMyComponent(final JComponent component) {
+        public void removeMyComponent(final JComponent component) {
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
