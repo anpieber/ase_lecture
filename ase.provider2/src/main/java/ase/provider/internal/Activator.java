@@ -1,11 +1,11 @@
 package ase.provider.internal;
 
+import javax.swing.*;
+
+import ase.api.StringHeaderExtensions;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
-import ase.api.StringHeaderExtensions;
-
-import javax.swing.*;
 
 public class Activator implements BundleActivator {
 
@@ -26,4 +26,5 @@ public class Activator implements BundleActivator {
     public void stop(BundleContext context) throws Exception {
         component1.unregister();
     }
+
 }

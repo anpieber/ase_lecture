@@ -1,37 +1,21 @@
 package ase.consumer.internal;
 
+import javax.swing.*;
+
+import ase.api.StringHeaderExtensions;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
-import ase.api.StringHeaderExtensions;
-
-import javax.swing.*;
-import java.awt.*;
 
 public class Activator implements BundleActivator {
 
-    private ServiceTracker<StringHeaderExtensions, JComponent> serviceTracker;
     private MainFrame mainFrame;
+    private ServiceTracker<StringHeaderExtensions, JComponent> serviceTracker;
 
     @Override
     public void start(BundleContext context) throws Exception {
         mainFrame = new MainFrame();
-        serviceTracker = new ServiceTracker<StringHeaderExtensions, JComponent>(
-                context, StringHeaderExtensions.class, null) {
-            @Override
-            public JComponent addingService(ServiceReference<StringHeaderExtensions> reference) {
-                StringHeaderExtensions service = context.getService(reference);
-                JComponent component = service.addNewStringHeaderExtension();
-                mainFrame.addMyComponent(component);
-                return component;
-            }
-
-            @Override
-            public void removedService(ServiceReference<StringHeaderExtensions> reference, JComponent service) {
-                mainFrame.removeMyComponent(service);
-            }
-        };
+        serviceTracker = new StringHeaderExtensionsTracker(context, mainFrame);
         serviceTracker.open();
         mainFrame.setVisible(true);
     }
@@ -42,33 +26,4 @@ public class Activator implements BundleActivator {
         mainFrame.setVisible(false);
     }
 
-    private class MainFrame extends JFrame {
-		private static final long serialVersionUID = 1651531688775745704L;
-
-		public MainFrame() throws HeadlessException {
-            setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-        }
-
-        public void addMyComponent(final JComponent component) {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    getContentPane().add(component);
-                    getContentPane().revalidate();
-                }
-            });
-
-        }
-
-        public void removeMyComponent(final JComponent component) {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    getContentPane().remove(component);
-                    getContentPane().revalidate();
-                    getContentPane().repaint();
-                }
-            });
-        }
-    }
 }
