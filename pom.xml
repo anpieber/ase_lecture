@@ -9,15 +9,15 @@
 
     <name>parent</name>
 
-    <modules>
-      <module>ase.api</module>
-      <module>ase.provider1</module>
-      <module>ase.provider2</module>
-      <module>ase.consumer</module>
-    </modules>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <modules>
+        <module>ase.api</module>
+        <module>ase.provider1</module>
+        <module>ase.provider2</module>
+        <module>ase.consumer</module>
+    </modules>
 
 </project>
